@@ -1,7 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from '../app.module';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
+
+class TestDependency {}
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -11,7 +13,7 @@ describe('UserController (e2e)', () => {
       imports: [AppModule],
     })
     .overrideProvider('SampleDependency')
-    .useClass(ValidationPipe)
+    .useClass(TestDependency)
     .compile();
 
     app = moduleFixture.createNestApplication();
